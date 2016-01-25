@@ -3,7 +3,7 @@ library(dplyr)
 rm(list=ls())
 
 #Data were downloaded and extracted
-setwd("C:/Users/KOLMACIM/Desktop/FTS/COURSERA_DATA_SCIENCE/3_Getting_and_Cleaning_Data/project")
+#setwd()
 
 #Loading data
 activityLabels <- read.table("./UCI HAR Dataset/activity_labels.txt",header = FALSE, col.names = c("ActivityId", "Activity"))
