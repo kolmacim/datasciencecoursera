@@ -1,4 +1,4 @@
-<h>Variables in Dataset</h>
+<h1>Variables in Dataset</h1>
 
 <ul>
 	<li>activityLabels 			- activity labels (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) </li>

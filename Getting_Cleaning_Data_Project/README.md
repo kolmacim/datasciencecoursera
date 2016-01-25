@@ -1,6 +1,6 @@
-<h>Getting and Cleaning Data Course Project</h>
+<h1>Getting and Cleaning Data Course Project</h1>
 
-<h1>Files in this Repository</h1>
+<h2>Files in this Repository</h2>
 
 <ul>
 	<li>Run_analysis.R - R script with code to tranform raw data</li>
@@ -8,7 +8,7 @@
 	<li>README.md - current file                                                  </li>
 </ul>
 
-<h1>Steps in Analysis</h1>
+<h2>Steps in Analysis</h2>
 
 <ul>
 	<li>All files were imported in the first stage                                                                               </li>
