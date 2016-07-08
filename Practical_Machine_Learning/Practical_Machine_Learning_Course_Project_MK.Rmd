@@ -1,0 +1,112 @@
+---
+title: "Practical Machine Learning Course Project"
+author: "Mario"
+date: "8 July 2016"
+output: html_document
+---
+
+##Overview
+
+
+In this project we will predict the manner in which they did the exercise. This is the "classe" variable in the training set. We are provided with test file with 20 cases where we have to predict exercise type, and wiht big training file to use for creating our model.
+
+##Loading data
+
+
+Loading required libraries
+```{r results='hide', message=FALSE, warning=FALSE}
+library(caret)
+library(dplyr)
+library(randomForest)
+```
+
+Clean environment
+```{r, echo=TRUE}
+rm(list = ls())
+```
+
+Load testing and training files
+```{r, echo=TRUE}
+test_file  <- read.csv("pml-testing.csv")
+training_file <- read.csv("pml-training.csv")
+```
+
+##Data cleansing
+
+
+Clean test file by removing any columns containing NA
+```{r, echo=TRUE}
+pml_testing  <- test_file[ , colSums( is.na(test_file) ) == 0]
+```
+
+Remove columns containing the time series data as they are not relevant for our calculations 
+```{r, echo=TRUE}
+pml_testing  <- pml_testing[ ,-c(1:7)]
+```
+
+Apply same columns to training file to be consistent and avoid discrepancies
+```{r, echo=TRUE}
+pml_training <- training_file %>% 
+  select(roll_belt,pitch_belt,yaw_belt,total_accel_belt
+         ,gyros_belt_x,gyros_belt_y,gyros_belt_z,accel_belt_x
+         ,accel_belt_y,accel_belt_z,magnet_belt_x,magnet_belt_y
+         ,magnet_belt_z,roll_arm,pitch_arm,yaw_arm,total_accel_arm
+         ,gyros_arm_x,gyros_arm_y,gyros_arm_z,accel_arm_x,accel_arm_y
+         ,accel_arm_z,magnet_arm_x,magnet_arm_y,magnet_arm_z
+         ,roll_dumbbell,pitch_dumbbell,yaw_dumbbell
+         ,total_accel_dumbbell,gyros_dumbbell_x,gyros_dumbbell_y
+         ,gyros_dumbbell_z,accel_dumbbell_x,accel_dumbbell_y
+         ,accel_dumbbell_z,magnet_dumbbell_x,magnet_dumbbell_y
+         ,magnet_dumbbell_z,roll_forearm,pitch_forearm,yaw_forearm
+         ,total_accel_forearm,gyros_forearm_x,gyros_forearm_y
+         ,gyros_forearm_z,accel_forearm_x,accel_forearm_y,accel_forearm_z
+         ,magnet_forearm_x,magnet_forearm_y,magnet_forearm_z,classe)
+```
+
+
+##Prediction preparation and model building
+
+
+Partition training dataset into training and test datasets in ratio 60/40 using seed 993 for reproducibility
+```{r, echo=TRUE}
+set.seed(933)
+inTrain <- createDataPartition(y=pml_training$classe, p=0.6, list=FALSE)
+testing <-  pml_training[-inTrain,]
+training <- pml_training[inTrain, ]
+```
+
+Building the model using the Random Forest method
+```{r, echo=TRUE}
+#Control the computational nuances of the train function (out-of-bag (OOB))
+rf_control <- trainControl(method = "oob")
+
+#default number of trees has been reduced from 500 to 200 due to complexity and time consumption
+rf_model <- train(classe ~ ., training, method = "rf", ntree = 200, trControl = rf_control)
+```
+
+Fitting the model and evaluate it using confusion matrix
+```{r}
+rf_modfit <- predict(rf_model, newdata=testing)
+
+confusionMatrix(testing$classe, rf_modfit)
+```
+Accuracy of 99,1% is more than enough to use Random Forest prediction method on our testing file.
+
+##Applying model on our testing file to see results
+
+
+Use columns without "NA" contained from testing file. We will exclude classe columns as we don't have it in initial testing file.
+```{r, echo=TRUE}
+columns <- colnames(pml_testing)
+
+test <- test_file[columns[columns!="classe"]]
+```
+
+Predict the answers using our model on initial test data with columns excluded in previous step.
+```{r}
+answers <- predict(rf_model, newdata = test)
+
+answers
+```
+
+
