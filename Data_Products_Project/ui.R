@@ -54,7 +54,7 @@ shinyUI(fluidPage(theme = shinytheme("cerulean"),
       tabPanel("Source",
                tags$p(href="a"),
                "Source code can be accessed on GitHub ",
-               tags$a(href="http://www.github.com", "here")
+               tags$a(href="https://github.com/kolmacim/datasciencecoursera/tree/master/Data_Products_Project", "here")
                )
     )
   )
