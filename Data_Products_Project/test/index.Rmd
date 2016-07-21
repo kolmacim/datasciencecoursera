@@ -46,11 +46,11 @@ modFitAll <- train(co2 ~ ., method = "lm", data = training)
 
 To get the result of specific manufacturer, we have to fill the form with 4 inputs.
 
-![Data Input](https://s32.postimg.org/5ih6nelr9/Capture1.png)
+![Data Input](Capture1.PNG)
 
 Result is displayed on the right.
 
-![Prediction result](https://s31.postimg.org/6j6g2thhn/Capture2.png)
+![Prediction result](Capture2.PNG)
 
 --- .class #id
 

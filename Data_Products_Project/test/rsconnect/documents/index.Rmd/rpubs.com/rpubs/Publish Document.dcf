@@ -1,7 +1,7 @@
 name: Publish Document
 account: rpubs
 server: rpubs.com
-appId: https://api.rpubs.com/api/v1/document/197692/0db9ded57d18495385111532ecfde8b3
-bundleId: https://api.rpubs.com/api/v1/document/197692/0db9ded57d18495385111532ecfde8b3
-url: http://rpubs.com/kolmacim/197692
-when: 1469116058.33971
+appId: https://api.rpubs.com/api/v1/document/197696/72e733cf895645fe88851abdb5ed35e1
+bundleId: https://api.rpubs.com/api/v1/document/197696/72e733cf895645fe88851abdb5ed35e1
+url: http://rpubs.com/publish/claim/197696/68a199a92bbf44da9a98f19c368d389e
+when: 1469117673.25808
