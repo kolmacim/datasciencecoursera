@@ -28,7 +28,8 @@ With developed R application, you are able to predict CO2 emission for specific 
 For dataset we used frictionlessdata source with emissions of engines produced between 2000. and 2013. Dataset is available [here](http://data.okfn.org/data/amercader/car-fuel-and-emissions).
 
 For purposes of our prediction, only four (Year of production, Manufacturer, Engine capacity, Fuel type) out of many variables has been used
-```{r, eval=FALSE}
+
+```r
     set.seed(933)
     inTrain  <- createDataPartition(y = fuel_data$co2, p=0.7, list=FALSE)
     testing  <- fuel_data[-inTrain,]
@@ -36,7 +37,8 @@ For purposes of our prediction, only four (Year of production, Manufacturer, Eng
 ```
 
 Linear model has been used for prediction
-```{r, eval=FALSE}
+
+```r
 modFitAll <- train(co2 ~ ., method = "lm", data = training)
 ```
 
@@ -46,11 +48,11 @@ modFitAll <- train(co2 ~ ., method = "lm", data = training)
 
 To get the result of specific manufacturer, we have to fill the form with 4 inputs.
 
-![Data Input](Capture1.png)
+![Data Input](/assets/img/Capture1.png)
 
 Result is displayed on the right.
 
-![Prediction result](Capture2.png)
+![Prediction result](/assets/img/Capture2.png)
 
 --- .class #id
 
